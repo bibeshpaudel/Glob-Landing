@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="36" height="36" role="img" aria-label="Glob Explorer icon">
+  <defs>
+    <linearGradient id="glob-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B1F3A"/>
+      <stop offset="55%" stop-color="#0E4C7A"/>
+      <stop offset="100%" stop-color="#12A3B4"/>
+    </linearGradient>
+    <linearGradient id="glob-sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.15"/>
+      <stop offset="60%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="114" fill="url(#glob-bg)"/>
+  <rect width="512" height="512" rx="114" fill="url(#glob-sheen)"/>
+  <g stroke="#FFFFFF" stroke-width="46" stroke-linecap="round">
+    <path d="M256 136 L256 376"/>
+    <path d="M152 196 L360 316"/>
+    <path d="M152 316 L360 196"/>
+  </g>
+</svg>
