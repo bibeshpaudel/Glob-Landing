@@ -1,42 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Glob Explorer — The File Manager Built for Velocity</title>
-  <meta name="description" content="Glob Explorer is a keyboard-first, native WinUI 3 file manager for Windows 10 &amp; 11 powered by bundled ripgrep and in-process fzf V2. Sub-millisecond search. Zero indexing bloat. 100% offline." />
-  <meta name="theme-color" content="#08090a" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Glob Explorer — The file manager built for velocity</title>
+  <meta name="description" content="Keyboard-first Windows file manager and high-performance search utility built for developers. Bundled ripgrep, in-process fzf V2, embedded Diff &amp; Merge, archive inspection, and storage treemap. 100% offline." />
 
-  <!-- Open Graph / Social -->
+  <!-- Open Graph / Meta -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Glob Explorer — The File Manager Built for Velocity" />
-  <meta property="og:description" content="Native WinUI 3 multi-tab file manager powered by ripgrep + fzf V2. Sub-millisecond search across drives. 100% offline &amp; free of telemetry." />
+  <meta property="og:title" content="Glob Explorer — The file manager built for velocity" />
+  <meta property="og:description" content="Keyboard-first Windows file manager built for developers. Bundled ripgrep + in-process fzf V2, Diff &amp; Merge, in-place archive browsing, and storage treemap. 100% offline." />
   <meta property="og:image" content="assets/search.png" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
-  <!-- Fonts: Inter (Linear's core typographic standard) + JetBrains Mono -->
+  <!-- Typography: Instrument Sans & JetBrains Mono (Official Design Language) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <!-- Ambient Linear-style top spotlight & grid backdrop -->
-  <div class="ambient-spotlight" aria-hidden="true"></div>
-  <div class="ambient-horizon-line" aria-hidden="true"></div>
-
   <!-- ========================================================================
-       1. Linear-Style Floating Sticky Navbar
+       1. Header & Navigation (Dark Blur Minimalist)
        ======================================================================== -->
-  <header class="navbar" role="banner">
-    <div class="container navbar-inner">
-      <a href="#" class="brand-link" aria-label="Glob Explorer Home">
-        <!-- Official Brand Logo -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="28" height="28" role="img" aria-label="Glob Explorer icon">
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a href="#top" class="brand-link" aria-label="Glob Explorer Home">
+        <svg class="brand-app-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="26" height="26" role="img" aria-label="Glob Explorer icon">
           <defs>
             <linearGradient id="glob-nav-bg" x1="0" y1="0" x2="1" y2="1">
               <stop offset="0%" stop-color="#0B1F3A"/>
@@ -44,673 +38,639 @@
               <stop offset="100%" stop-color="#12A3B4"/>
             </linearGradient>
             <linearGradient id="glob-nav-sheen" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.2"/>
+              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.15"/>
               <stop offset="60%" stop-color="#FFFFFF" stop-opacity="0"/>
             </linearGradient>
           </defs>
           <rect width="512" height="512" rx="114" fill="url(#glob-nav-bg)"/>
-          <rect width="512" height="512" rx="114" fill="url(#glob-nav-sheen)"/>
+          <rect width="512" height="512" rx="114" fill="url(#glob-sheen)"/>
           <g stroke="#FFFFFF" stroke-width="46" stroke-linecap="round">
             <path d="M256 136 L256 376"/>
             <path d="M152 196 L360 316"/>
             <path d="M152 316 L360 196"/>
           </g>
         </svg>
-        <span class="brand-text">Glob Explorer</span>
-        <span class="version-tag">v1.0</span>
+        <span>Glob Explorer</span>
       </a>
 
-      <nav class="nav-menu" aria-label="Primary Navigation">
-        <ul class="nav-links">
-          <li><a href="#overview">Overview</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#shortcuts">Shortcuts</a></li>
-          <li><a href="#privacy">Privacy</a></li>
-        </ul>
+      <nav class="site-nav" id="site-nav" aria-label="Main Navigation">
+        <a href="#search" class="nav-item">Search</a>
+        <a href="#features" class="nav-item">Features</a>
+        <a href="#workflows" class="nav-item">Workflows</a>
+        <a href="#shortcuts" class="nav-item">Shortcuts</a>
+        <a href="#privacy" class="nav-item">Privacy</a>
+        <a href="#specs" class="nav-item">Specs</a>
       </nav>
 
-      <div class="nav-actions">
+      <div class="header-actions">
         <a
           href="https://apps.microsoft.com/detail/9NH3SKHSVBK1?hl=en-us&gl=US&ocid=pdpshare"
           target="_blank"
           rel="noopener noreferrer"
-          class="btn-nav-primary"
+          class="btn-header-cta"
         >
-          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="win-icon">
-            <path d="M0 0h7.5v7.5H0V0zm8.5 0H16v7.5H8.5V0zM0 8.5h7.5V16H0V8.5zm8.5 0H16V16H8.5V8.5z"/>
-          </svg>
           <span>Get Glob</span>
         </a>
+
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
       </div>
     </div>
   </header>
 
   <main>
     <!-- ======================================================================
-         2. Hero Section (Linear Design Pattern)
+         2. Hero Section
          ====================================================================== -->
-    <section class="hero" id="overview">
-      <div class="container hero-container">
-
-        <!-- Linear-style Announcement Pill -->
+    <section class="hero-section">
+      <div class="container">
         <a
           href="https://apps.microsoft.com/detail/9NH3SKHSVBK1?hl=en-us&gl=US&ocid=pdpshare"
           target="_blank"
           rel="noopener noreferrer"
           class="announcement-pill"
         >
-          <span class="pill-badge">Release</span>
-          <span class="pill-text">Glob Explorer 1.0 is now live on Microsoft Store</span>
-          <span class="pill-arrow" aria-hidden="true">→</span>
+          <span class="pill-tag">v1.0.8</span>
+          <span>Now live on Microsoft Store →</span>
         </a>
 
-        <!-- Hero Headline with Linear Gradient Mask -->
-        <h1 class="hero-title">
-          The file manager<br />
-          <span class="hero-title-gradient">built for velocity.</span>
-        </h1>
+        <div class="hero-grid">
+          <h1 class="hero-title">The file manager built for velocity.</h1>
 
-        <!-- Subheadline -->
-        <p class="hero-subtitle">
-          Glob Explorer combines modern multi-tab Windows ergonomics with bundled <strong>ripgrep</strong> and in-process <strong>fzf V2</strong>. Sub-millisecond search across entire drives without background indexing bloat. 100% offline.
-        </p>
+          <div class="hero-content">
+            <p class="hero-desc">
+              Glob Explorer combines modern multi-tab Windows ergonomics with bundled <code>ripgrep</code> and in-process <code>fzf V2</code>. Sub-millisecond search across entire drives without background indexing bloat. 100% offline.
+            </p>
 
-        <!-- Linear-style Button Group -->
-        <div class="hero-cta-group">
-          <a
-            href="https://apps.microsoft.com/detail/9NH3SKHSVBK1?hl=en-us&gl=US&ocid=pdpshare"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn-linear-primary"
-          >
-            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="win-icon">
-              <path d="M0 0h7.5v7.5H0V0zm8.5 0H16v7.5H8.5V0zM0 8.5h7.5V16H0V8.5zm8.5 0H16V16H8.5V8.5z"/>
-            </svg>
-            <span>Download on Microsoft Store</span>
-            <span class="btn-arrow" aria-hidden="true">→</span>
-          </a>
+            <div class="hero-actions">
+              <a
+                href="https://apps.microsoft.com/detail/9NH3SKHSVBK1?hl=en-us&gl=US&ocid=pdpshare"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-primary"
+              >
+                <span>Download on Microsoft Store →</span>
+              </a>
 
-          <a
-            href="ms-windows-store://pdp/?productid=9NH3SKHSVBK1"
-            class="btn-linear-secondary"
-            title="Open directly in the Microsoft Store app on Windows"
-          >
-            <span>Open Store App</span>
-            <span class="btn-external-icon" aria-hidden="true">↗</span>
-          </a>
-        </div>
-
-        <!-- Metric Telemetry Badges Strip -->
-        <div class="hero-metrics-strip">
-          <div class="metric-pill">
-            <span class="metric-dot green"></span>
-            <span>Windows 10 &amp; 11 Native</span>
-          </div>
-          <div class="metric-pill">
-            <span class="metric-dot cyan"></span>
-            <span>291 ms Ripgrep Traversal</span>
-          </div>
-          <div class="metric-pill">
-            <span class="metric-dot blue"></span>
-            <span>Zero Background Indexing</span>
-          </div>
-          <div class="metric-pill">
-            <span class="metric-dot purple"></span>
-            <span>100% Offline &amp; Private</span>
-          </div>
-        </div>
-
-        <!-- ==================================================================
-             3. Hero Product Showcase (Frameless Dark Canvas + Tabs)
-             ================================================================== -->
-        <div class="showcase-section">
-          <!-- Radiant Aura behind showcase -->
-          <div class="showcase-glow" aria-hidden="true"></div>
-
-          <!-- Linear Segmented Tab Controls -->
-          <div class="segmented-control" role="tablist" aria-label="Glob Explorer application views">
-            <button
-              type="button"
-              role="tab"
-              aria-selected="true"
-              aria-controls="slide-search"
-              class="segmented-tab active"
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="11" cy="11" r="8"/>
-                <path d="m21 21-4.3-4.3"/>
-              </svg>
-              <span>Search &amp; Content</span>
-              <span class="tab-chip">291 ms</span>
-            </button>
-
-            <button
-              type="button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="slide-drives"
-              class="segmented-tab"
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect width="20" height="8" x="2" y="4" rx="2"/>
-                <rect width="20" height="8" x="2" y="12" rx="2"/>
-                <line x1="6" x2="6.01" y1="8" y2="8"/>
-                <line x1="6" x2="6.01" y1="16" y2="16"/>
-              </svg>
-              <span>This PC &amp; Drives</span>
-              <span class="tab-chip">21 ms</span>
-            </button>
-
-            <button
-              type="button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="slide-details"
-              class="segmented-tab"
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect width="18" height="18" x="3" y="3" rx="2"/>
-                <circle cx="9" cy="9" r="2"/>
-                <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
-              </svg>
-              <span>Live Inspector</span>
-              <span class="tab-chip">2 ms</span>
-            </button>
-
-            <button
-              type="button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="slide-settings"
-              class="segmented-tab"
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
-                <circle cx="12" cy="12" r="3"/>
-              </svg>
-              <span>Developer Filters</span>
-              <span class="tab-chip">Config</span>
-            </button>
-          </div>
-
-          <!-- Linear-style Sleek Canvas Frame -->
-          <div class="linear-window-frame">
-            <!-- Window Titlebar -->
-            <div class="window-titlebar">
-              <div class="window-traffic-lights">
-                <span class="light red"></span>
-                <span class="light yellow"></span>
-                <span class="light green"></span>
-              </div>
-              <div class="window-title-center">
-                <svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12" aria-hidden="true">
-                  <path d="M0 0h7.5v7.5H0V0zm8.5 0H16v7.5H8.5V0zM0 8.5h7.5V16H0V8.5zm8.5 0H16V16H8.5V8.5z"/>
-                </svg>
-                <span>Glob Explorer — WinUI 3</span>
-              </div>
-              <div class="window-title-right">
-                <span class="window-status-badge">rg.exe active</span>
-              </div>
+              <a
+                href="ms-windows-store://pdp/?productid=9NH3SKHSVBK1"
+                class="btn-secondary"
+              >
+                <span>Open Store app ↗</span>
+              </a>
             </div>
 
-            <!-- Viewport Screen -->
-            <div class="window-viewport">
-              <div id="slide-search" class="showcase-slide active" role="tabpanel">
-                <img
-                  src="assets/search.png"
-                  alt="Glob Explorer Search &amp; Code Preview showing simultaneous Files, Folders, and ripgrep Contents search results in 291 ms"
-                  width="1920"
-                  height="1080"
-                />
-              </div>
-              <div id="slide-drives" class="showcase-slide" role="tabpanel">
-                <img
-                  src="assets/home.png"
-                  alt="Glob Explorer This PC &amp; Drives view with NTFS storage capacity gauge and Quick Access folders"
-                  width="1920"
-                  height="1080"
-                  loading="lazy"
-                />
-              </div>
-              <div id="slide-details" class="showcase-slide" role="tabpanel">
-                <img
-                  src="assets/preview.png"
-                  alt="Glob Explorer Details View &amp; File Actions with live PNG image preview and resolution metadata"
-                  width="1920"
-                  height="1080"
-                  loading="lazy"
-                />
-              </div>
-              <div id="slide-settings" class="showcase-slide" role="tabpanel">
-                <img
-                  src="assets/setting.png"
-                  alt="Glob Explorer Settings modal showing App Theme, Respect .gitignore, Match file name only, and Show hidden files toggles"
-                  width="1920"
-                  height="1080"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-
-            <!-- Linear-style Window Status Footer -->
-            <div class="window-status-bar">
-              <div class="status-left">
-                <span id="showcase-caption-badge" class="status-badge">Search &amp; Content Match</span>
-                <span id="showcase-caption-text" class="status-text">Simultaneous Files, Folders, and ripgrep Content matching with live folder &amp; code inspection.</span>
-              </div>
-              <div class="status-right">
-                <span id="showcase-caption-metric" class="status-metric">76 items · 291 ms</span>
-                <button type="button" id="btn-zoom-current" class="btn-expand" aria-label="Expand screenshot in full resolution">
-                  <span>Expand</span>
-                  <span aria-hidden="true">⤢</span>
-                </button>
-              </div>
+            <div class="hero-meta-row">
+              <span class="meta-dot">Windows 10 &amp; 11</span>
+              <span class="meta-dot">x64 · ARM64</span>
+              <span class="meta-dot">.NET 10 LTS</span>
+              <span class="meta-dot">No indexing</span>
+              <span class="meta-dot">No network access</span>
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- Linear-style Brand / Proof Strip -->
-    <div class="proof-strip">
-      <div class="container proof-inner">
-        <span class="proof-label">Engineered with high craft for developer workflows</span>
-        <div class="proof-logos">
-          <span class="proof-item"><span class="proof-dot"></span>WinUI 3 &amp; Windows App SDK</span>
-          <span class="proof-item"><span class="proof-dot"></span>Bundled ripgrep (rg.exe)</span>
-          <span class="proof-item"><span class="proof-dot"></span>In-Process C# fzf V2</span>
-          <span class="proof-item"><span class="proof-dot"></span>Native Windows Shell API</span>
-          <span class="proof-item"><span class="proof-dot"></span>.NET 10 AOT Optimized</span>
+    <!-- ======================================================================
+         3. Interactive Screenshot Showcase & Lightbox
+         ====================================================================== -->
+    <section class="showcase-section" aria-label="Application Showcase">
+      <div class="container">
+        <!-- Tab Bar -->
+        <div class="showcase-tabs" role="tablist">
+          <button class="showcase-tab active" data-index="0" role="tab" aria-selected="true">
+            <span>Search &amp; Content</span>
+            <span class="tab-meta">291 ms</span>
+          </button>
+          <button class="showcase-tab" data-index="1" role="tab" aria-selected="false">
+            <span>This PC &amp; Drives</span>
+            <span class="tab-meta">21 ms</span>
+          </button>
+          <button class="showcase-tab" data-index="2" role="tab" aria-selected="false">
+            <span>Live Inspector</span>
+            <span class="tab-meta">2 ms</span>
+          </button>
+          <button class="showcase-tab" data-index="3" role="tab" aria-selected="false">
+            <span>Settings</span>
+            <span class="tab-meta">Config</span>
+          </button>
+        </div>
+
+        <!-- WinUI 3 Window Frame Mockup -->
+        <div class="showcase-frame">
+          <div class="showcase-titlebar">
+            <span>Glob Explorer — WinUI 3</span>
+            <div class="status-indicator">
+              <span class="pulse-dot"></span>
+              <span>rg.exe active</span>
+            </div>
+          </div>
+
+          <button class="showcase-viewport" id="showcase-viewport" aria-label="Zoom screenshot">
+            <img
+              id="showcase-main-img"
+              class="showcase-img"
+              src="assets/search.png"
+              alt="Glob Explorer dual search results across files, paths, and ripgrep content"
+            />
+          </button>
+        </div>
+
+        <!-- Showcase Caption & Navigation Hint -->
+        <div class="showcase-footer">
+          <span class="showcase-caption">
+            <strong id="showcase-caption-title">Dual-Engine Search &amp; Context Cards.</strong>
+            <span id="showcase-caption-desc">In-process fzf fuzzy matching over paths and streaming ripgrep full-text search with multi-line context cards side by side.</span>
+          </span>
+          <span class="showcase-hint">Click image to expand · ← → to switch tabs</span>
         </div>
       </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightbox-modal" role="dialog" aria-modal="true" aria-label="Expanded Screenshot">
+      <img id="lightbox-img" class="lightbox-img" src="assets/search.png" alt="Expanded view" />
+      <span class="lightbox-close-badge">ESC · Click to Close</span>
     </div>
 
     <!-- ======================================================================
-         4. Linear-Style Bento Feature Section
+         4. Tech Architecture Strip
          ====================================================================== -->
-    <section id="features" class="section">
+    <section class="tech-bar-section">
+      <div class="container tech-bar-inner">
+        <span class="tech-bar-label">Built with</span>
+        <span class="tech-tag">WinUI 3 &amp; Windows App SDK 1.8</span>
+        <span class="tech-tag">ripgrep (rg.exe)</span>
+        <span class="tech-tag">In-process C# fzf V2</span>
+        <span class="tech-tag">.NET 10 (LTS) Self-Contained</span>
+        <span class="tech-tag">Mica Backdrop &amp; Fluent Design</span>
+        <span class="tech-tag">Native Win32 Shell API</span>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         5. Live Search & Progressive Filtering Playground
+         ====================================================================== -->
+    <section class="search-section" id="search">
       <div class="container">
-        <div class="section-header">
-          <span class="section-kicker">Architecture &amp; Capabilities</span>
+        <div class="search-grid">
+          <!-- Left Info Column -->
+          <div class="search-info-col">
+            <span class="section-tag">rg.exe + fzf V2</span>
+            <h2 class="section-title">Instant fuzzy and ripgrep content search.</h2>
+            <p class="section-lead">
+              Ripgrep traversal with in-process fuzzy scoring. Filter across files, directory paths, and file contents simultaneously with multi-line context cards and <code>-C 2</code> surrounding context.
+            </p>
+
+            <div class="syntax-grid">
+              <button class="syntax-pill" data-query="t:code">t:code</button>
+              <span class="syntax-desc">Filter source code files</span>
+
+              <button class="syntax-pill" data-query="ext:cs">ext:cs</button>
+              <span class="syntax-desc">Filter by specific extension</span>
+
+              <button class="syntax-pill" data-query="in:src">in:src</button>
+              <span class="syntax-desc">Restrict query to subfolder</span>
+
+              <button class="syntax-pill" data-query="content:TODO">content:TODO</button>
+              <span class="syntax-desc">Full-text regex content match</span>
+
+              <button class="syntax-pill" data-query="'Myers">'Myers</button>
+              <span class="syntax-desc">Exact substring matching</span>
+
+              <button class="syntax-pill" data-query="src !test">src !test</button>
+              <span class="syntax-desc">Inverted exclusion filter</span>
+            </div>
+          </div>
+
+          <!-- Right Interactive Search Window -->
+          <div class="search-playground-card">
+            <div class="search-input-bar">
+              <span class="search-prompt-symbol" aria-hidden="true">›</span>
+              <input
+                type="text"
+                id="playground-search-input"
+                class="search-input"
+                value="src ext:cs"
+                placeholder="Try ext:cs, content:TODO, or 'diff !test"
+                spellcheck="false"
+                aria-label="Interactive search query input"
+              />
+              <span class="search-input-shortcut">Ctrl K</span>
+            </div>
+
+            <!-- Filter chips -->
+            <div class="filter-chips-bar">
+              <span class="filter-chip" onclick="document.getElementById('playground-search-input').value = 'src ext:cs'; document.getElementById('playground-search-input').dispatchEvent(new Event('input'));">
+                ext:cs <span class="filter-chip-remove">×</span>
+              </span>
+              <span class="filter-chip" onclick="document.getElementById('playground-search-input').value = 'content:Myers'; document.getElementById('playground-search-input').dispatchEvent(new Event('input'));">
+                content:Myers <span class="filter-chip-remove">×</span>
+              </span>
+              <span class="filter-chip" onclick="document.getElementById('playground-search-input').value = 'in:src'; document.getElementById('playground-search-input').dispatchEvent(new Event('input'));">
+                in:src <span class="filter-chip-remove">×</span>
+              </span>
+            </div>
+
+            <!-- Search Results Stream -->
+            <div class="search-results-container" id="search-results-container">
+              <!-- Dynamically rendered by script.js -->
+            </div>
+
+            <!-- Search Footer -->
+            <div class="search-footer-bar">
+              <span id="search-match-count">12 of 16 items</span>
+              <span>.gitignore respected · Ctrl+I to bypass</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         6. Complete Feature Breakdown (1px Dark Grid Layout)
+         ====================================================================== -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <div class="section-header" style="max-width: 720px;">
+          <span class="section-tag">Architecture &amp; Capabilities</span>
           <h2 class="section-title">Built for developers who outgrew standard File Explorer.</h2>
-          <p class="section-desc">
-            Linear-grade performance meets native Windows system integration. Every action executes instantaneously without latency or background overhead.
+          <p class="section-lead">
+            Every feature is engineered for zero-latency execution, hardware acceleration, and keyboard navigation.
           </p>
         </div>
 
-        <!-- Bento Grid with Interactive Mouse Glow -->
-        <div class="bento-grid">
-          <!-- Card 1: Ripgrep + fzf V2 -->
-          <article class="bento-card" data-spotlight>
-            <div class="bento-card-inner">
-              <div class="bento-header">
-                <div class="bento-icon-box">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                  </svg>
-                </div>
-                <span class="bento-badge">rg.exe + fzf V2</span>
-              </div>
-              <h3 class="bento-card-title">Instant Fuzzy &amp; Content Search</h3>
-              <p class="bento-card-desc">
-                Ripgrep traversal with in-process fuzzy scoring. Filter across <code class="code-chip">Files</code>, <code class="code-chip">Folders</code>, and file <code class="code-chip">Contents</code> simultaneously with zero latency.
-              </p>
-              <div class="bento-syntax-preview">
-                <div class="token-row">
-                  <code>'exact</code>
-                  <span>Exact substring</span>
-                </div>
-                <div class="token-row">
-                  <code>^src</code>
-                  <span>Starts with prefix</span>
-                </div>
-                <div class="token-row">
-                  <code>.tsx$</code>
-                  <span>Ends with suffix</span>
-                </div>
-                <div class="token-row">
-                  <code>!node_modules</code>
-                  <span>Inverted exclude</span>
-                </div>
-              </div>
-              <div class="bento-footer">
-                <span class="micro-pill">Sub-second scan</span>
-                <span class="micro-pill">Boolean AND logic</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Card 2: Multi-Tab & Breadcrumbs -->
-          <article class="bento-card" data-spotlight>
-            <div class="bento-card-inner">
-              <div class="bento-header">
-                <div class="bento-icon-box">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                    <path d="M2 10h20"/>
-                    <path d="M9 4v6"/>
-                  </svg>
-                </div>
-                <span class="bento-badge">Multi-Tab + Shell</span>
-              </div>
-              <h3 class="bento-card-title">Multi-Tab Workspace &amp; Breadcrumbs</h3>
-              <p class="bento-card-desc">
-                Browse with independent tabs (<code class="code-chip">Ctrl+T</code>), Back/Forward history, sibling folder navigation, and an editable address bar that launches shells directly.
-              </p>
-              <div class="bento-terminal-strip">
-                <div class="term-tag"><code>wt</code> Terminal</div>
-                <div class="term-tag"><code>pwsh</code> PowerShell 7</div>
-                <div class="term-tag"><code>cmd</code> Command Prompt</div>
-              </div>
-              <div class="bento-footer">
-                <span class="micro-pill">Ctrl+T / Ctrl+W</span>
-                <span class="micro-pill">Deep Breadcrumb Dropdown</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Card 3: Live Inspector -->
-          <article class="bento-card" data-spotlight>
-            <div class="bento-card-inner">
-              <div class="bento-header">
-                <div class="bento-icon-box">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
-                    <circle cx="12" cy="12" r="3"/>
-                  </svg>
-                </div>
-                <span class="bento-badge">Zero-Latency Inspector</span>
-              </div>
-              <h3 class="bento-card-title">Context-Sensitive Live Preview</h3>
-              <p class="bento-card-desc">
-                Inspect source code with virtualized line numbering, preview raster &amp; vector images (<code class="code-chip">PNG</code>, <code class="code-chip">SVG</code>, <code class="code-chip">WebP</code>), and inspect NTFS drive capacities instantly.
-              </p>
-              <div class="inspector-mock">
-                <div class="inspector-line"><span class="line-no">01</span><span class="code-hl">const</span> results = await rg.search(query);</div>
-                <div class="inspector-line"><span class="line-no">02</span><span class="code-hl">const</span> filtered = fzf.score(results);</div>
-              </div>
-              <div class="bento-footer">
-                <span class="micro-pill">Code Virtualization</span>
-                <span class="micro-pill">NTFS Telemetry</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Card 4: Layouts -->
-          <article class="bento-card" data-spotlight>
-            <div class="bento-card-inner">
-              <div class="bento-header">
-                <div class="bento-icon-box">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect width="7" height="7" x="3" y="3" rx="1"/>
-                    <rect width="7" height="7" x="14" y="3" rx="1"/>
-                    <rect width="7" height="7" x="14" y="14" rx="1"/>
-                    <rect width="7" height="7" x="3" y="14" rx="1"/>
-                  </svg>
-                </div>
-                <span class="bento-badge">Ctrl+Shift+1/2/3</span>
-              </div>
-              <h3 class="bento-card-title">List, Grid &amp; Sortable Details</h3>
-              <p class="bento-card-desc">
-                Switch layouts instantly with keyboard shortcuts. Sort by Name, Type, Size, or Modified date with directory-first grouping and fluid animations.
-              </p>
-              <div class="bento-footer">
-                <span class="micro-pill">Compact List</span>
-                <span class="micro-pill">Large Grid</span>
-                <span class="micro-pill">Sortable Details</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Card 5: Safe Shell Operations -->
-          <article class="bento-card" data-spotlight>
-            <div class="bento-card-inner">
-              <div class="bento-header">
-                <div class="bento-icon-box">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    <path d="m9 12 2 2 4-4"/>
-                  </svg>
-                </div>
-                <span class="bento-badge">SHFileOperation</span>
-              </div>
-              <h3 class="bento-card-title">Safe Native Shell Operations</h3>
-              <p class="bento-card-desc">
-                Full clipboard support, Rename (<code class="code-chip">F2</code>), ZIP compression, Drag-and-Drop, and safe Recycle Bin deletion with non-blocking progress toasts and conflict resolution.
-              </p>
-              <div class="bento-footer">
-                <span class="micro-pill">Recycle Bin Safe</span>
-                <span class="micro-pill">Undo Compatible</span>
-                <span class="micro-pill">ZIP Support</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Card 6: Developer Toggles -->
-          <article class="bento-card" data-spotlight>
-            <div class="bento-card-inner">
-              <div class="bento-header">
-                <div class="bento-icon-box">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
-                  </svg>
-                </div>
-                <span class="bento-badge">Single Keystroke</span>
-              </div>
-              <h3 class="bento-card-title">Developer-First Filter Toggles</h3>
-              <p class="bento-card-desc">
-                One-keystroke toggles for <code class="code-chip">.gitignore</code> filtering (<code class="code-chip">Ctrl+I</code>), hidden &amp; system files (<code class="code-chip">Ctrl+H</code>), filename-only matching (<code class="code-chip">Alt+P</code>), and pane collapses.
-              </p>
-              <div class="bento-footer">
-                <span class="micro-pill">.gitignore (gi)</span>
-                <span class="micro-pill">Hidden Files</span>
-                <span class="micro-pill">Filename-Only</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================================================
-         5. Linear-Style Keyboard-First Ergonomics / Interactive Palette
-         ====================================================================== -->
-    <section id="shortcuts" class="section shortcuts-section">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-kicker">Keyboard-First Ergonomics</span>
-          <h2 class="section-title">Designed for home row navigation.</h2>
-          <p class="section-desc">
-            Filter repositories, open tabs, toggle inspector panes, and launch terminals without taking your hands off the keyboard.
-          </p>
-        </div>
-
-        <!-- Interactive Shortcut Search Filter -->
-        <div class="shortcut-palette-container">
-          <div class="palette-search-bar">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon" aria-hidden="true">
-              <circle cx="11" cy="11" r="8"/>
-              <path d="m21 21-4.3-4.3"/>
-            </svg>
-            <input
-              type="text"
-              id="shortcut-filter-input"
-              class="palette-input"
-              placeholder="Search shortcuts by action or key (e.g. search, tab, git, layout, delete)..."
-              autocomplete="off"
-              spellcheck="false"
-            />
-            <span class="palette-hint">Filter</span>
-          </div>
-
-          <div class="shortcuts-grid" id="shortcuts-grid">
-            <!-- 1 -->
-            <div class="shortcut-card" data-keywords="focus search query ctrl k">
-              <span class="shortcut-desc">Focus search bar &amp; select query</span>
-              <div class="shortcut-keys">
-                <kbd>Ctrl</kbd><span class="key-plus">+</span><kbd>K</kbd>
-              </div>
-            </div>
-
-            <!-- 2 -->
-            <div class="shortcut-card" data-keywords="address bar shell command path terminal ctrl l alt d">
-              <span class="shortcut-desc">Edit address bar or run terminal command</span>
-              <div class="shortcut-keys">
-                <kbd>Ctrl</kbd><span class="key-plus">+</span><kbd>L</kbd>
-                <span class="key-or">/</span>
-                <kbd>Alt</kbd><span class="key-plus">+</span><kbd>D</kbd>
-              </div>
-            </div>
-
-            <!-- 3 -->
-            <div class="shortcut-card" data-keywords="new tab close tab ctrl t ctrl w">
-              <span class="shortcut-desc">Open new tab / Close active tab</span>
-              <div class="shortcut-keys">
-                <kbd>Ctrl</kbd><span class="key-plus">+</span><kbd>T</kbd>
-                <span class="key-or">/</span>
-                <kbd>Ctrl</kbd><span class="key-plus">+</span><kbd>W</kbd>
-              </div>
-            </div>
-
-            <!-- 4 -->
-            <div class="shortcut-card" data-keywords="gitignore filter rules git ctrl i">
-              <span class="shortcut-desc">Toggle <code class="code-chip">.gitignore</code> filtering</span>
-              <div class="shortcut-keys">
-                <kbd>Ctrl</kbd><span class="key-plus">+</span><kbd>I</kbd>
-              </div>
-            </div>
-
-            <!-- 5 -->
-            <div class="shortcut-card" data-keywords="hidden system files show hide ctrl h">
-              <span class="shortcut-desc">Toggle hidden &amp; system files</span>
-              <div class="shortcut-keys">
-                <kbd>Ctrl</kbd><span class="key-plus">+</span><kbd>H</kbd>
-              </div>
-            </div>
-
-            <!-- 6 -->
-            <div class="shortcut-card" data-keywords="filename only path match alt p">
-              <span class="shortcut-desc">Toggle filename-only matching</span>
-              <div class="shortcut-keys">
-                <kbd>Alt</kbd><span class="key-plus">+</span><kbd>P</kbd>
-              </div>
-            </div>
-
-            <!-- 7 -->
-            <div class="shortcut-card" data-keywords="preview pane sidebar toggle ctrl p ctrl b">
-              <span class="shortcut-desc">Toggle preview pane / sidebar</span>
-              <div class="shortcut-keys">
-                <kbd>Ctrl</kbd><span class="key-plus">+</span><kbd>P</kbd>
-                <span class="key-or">/</span>
-                <kbd>Ctrl</kbd><span class="key-plus">+</span><kbd>B</kbd>
-              </div>
-            </div>
-
-            <!-- 8 -->
-            <div class="shortcut-card" data-keywords="switch layout list grid details ctrl shift 1 2 3">
-              <span class="shortcut-desc">Switch List, Grid, and Details view</span>
-              <div class="shortcut-keys">
-                <kbd>Ctrl</kbd><span class="key-plus">+</span><kbd>Shift</kbd><span class="key-plus">+</span><kbd>1/2/3</kbd>
-              </div>
-            </div>
-
-            <!-- 9 -->
-            <div class="shortcut-card" data-keywords="rename delete recycle bin properties f2 del alt enter">
-              <span class="shortcut-desc">Rename, Recycle Bin delete, Properties</span>
-              <div class="shortcut-keys">
-                <kbd>F2</kbd>
-                <span class="key-or">/</span>
-                <kbd>Del</kbd>
-                <span class="key-or">/</span>
-                <kbd>Alt</kbd><span class="key-plus">+</span><kbd>Enter</kbd>
-              </div>
-            </div>
-
-            <!-- 10 -->
-            <div class="shortcut-card" data-keywords="parent folder up navigate backspace ctrl up">
-              <span class="shortcut-desc">Navigate up to parent folder</span>
-              <div class="shortcut-keys">
-                <kbd>Backspace</kbd>
-                <span class="key-or">/</span>
-                <kbd>Ctrl</kbd><span class="key-plus">+</span><kbd>Up</kbd>
-              </div>
+        <div class="features-grid">
+          <!-- Card 1: Dual Search Engine -->
+          <div class="feature-card">
+            <span class="feature-tag">Dual-Engine Search</span>
+            <h3 class="feature-title">Progressive Search &amp; Context Cards</h3>
+            <p class="feature-body">
+              In-process continuous substring and fzf v2 fuzzy matching prioritizes filenames over parent folders. Bundled ripgrep streams full-text results via <code>IAsyncEnumerable</code> in ~60–120 ms with multi-line context cards and smart line trimming.
+            </p>
+            <div class="feature-chips">
+              <span class="chip">ripgrep</span>
+              <span class="chip">fzf v2</span>
+              <span class="chip">Line {N}</span>
+              <span class="chip">-C 2 Context</span>
+              <span class="chip">Ctrl+1/2</span>
             </div>
           </div>
-          <div id="no-shortcuts-msg" class="no-results-msg" style="display: none;">
-            No keyboard shortcuts match your query.
+
+          <!-- Card 2: Tabbed Navigation -->
+          <div class="feature-card">
+            <span class="feature-tag">Multi-Window Multitasking</span>
+            <h3 class="feature-title">Browser Tabs &amp; Multi-Monitor Tear-Off</h3>
+            <p class="feature-body">
+              Middle-click any folder or drive to open it in a background tab. Drag tabs to reorder with fluid physics, or drag a tab outside the window to automatically detect cursor coordinates and spawn a new maximized window on that monitor.
+            </p>
+            <div class="feature-chips">
+              <span class="chip">Middle-Click</span>
+              <span class="chip">Tear-Off Tabs</span>
+              <span class="chip">Ctrl+T</span>
+              <span class="chip">Ctrl+W</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Viewing Modes & Thumbnails -->
+          <div class="feature-card">
+            <span class="feature-tag">Visual Ergonomics</span>
+            <h3 class="feature-title">List, Details &amp; Hardware WIC Thumbnails</h3>
+            <p class="feature-body">
+              Switch seamlessly between List, Details, and Grid views. Sub-millisecond thumbnail extraction via <code>IShellItemImageFactory</code> with bounded 1,000-item LRU cache ensures zero UI stutter during 120 FPS scrolling. Smooth pinch-to-zoom transitions.
+            </p>
+            <div class="feature-chips">
+              <span class="chip">WIC LRU Cache</span>
+              <span class="chip">120 FPS</span>
+              <span class="chip">Pinch Zoom</span>
+              <span class="chip">Marquee Select</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Myers Diff & Merge -->
+          <div class="feature-card">
+            <span class="feature-tag">Developer Diff Suite</span>
+            <h3 class="feature-title">Embedded Myers Diff &amp; Merge Editor</h3>
+            <p class="feature-body">
+              Embedded directly into the tab system. Powered by Eugene Myers' $O(ND)$ diff algorithm with sub-line token highlighting, 50/50 DirectComposition hardware clipping, proportional minimap overview, and one-click bidirectional merging with undo/redo.
+            </p>
+            <div class="feature-chips">
+              <span class="chip">Myers O(ND)</span>
+              <span class="chip">DirectComposition</span>
+              <span class="chip">Minimap</span>
+              <span class="chip">Atomic Save</span>
+            </div>
+          </div>
+
+          <!-- Card 5: In-Place Archive Inspection -->
+          <div class="feature-card">
+            <span class="feature-tag">Zero-Extraction Browsing</span>
+            <h3 class="feature-title">In-Place Archive Inspection</h3>
+            <p class="feature-body">
+              Browse directly inside <code>.zip</code>, <code>.tar</code>, <code>.tar.gz</code>, <code>.tgz</code>, <code>.7z</code>, and <code>.rar</code> files as regular folders. Full breadcrumbs, fuzzy search inside archives, streaming previews, and selective extraction using Windows-bundled <code>tar.exe</code>.
+            </p>
+            <div class="feature-chips">
+              <span class="chip">.7z · .rar · .zip</span>
+              <span class="chip">libarchive</span>
+              <span class="chip">Zero Temp Files</span>
+              <span class="chip">Taskbar Progress</span>
+            </div>
+          </div>
+
+          <!-- Card 6: Squarified Treemap -->
+          <div class="feature-card">
+            <span class="feature-tag">Storage Analyzer</span>
+            <h3 class="feature-title">Interactive Squarified Storage Treemap</h3>
+            <p class="feature-body">
+              Visualizes directory and drive storage allocation as proportional interactive blocks (<code>Ctrl+Shift+4</code>). Categorized color coding by file types (Video, Audio, Image, Code, Archive), with double-click drill-down and live preview pane synchronization.
+            </p>
+            <div class="feature-chips">
+              <span class="chip">Ctrl+Shift+4</span>
+              <span class="chip">Squarified Treemap</span>
+              <span class="chip">Color Categories</span>
+              <span class="chip">Live Drill-Down</span>
+            </div>
+          </div>
+
+          <!-- Card 7: Rich Preview Pane -->
+          <div class="feature-card">
+            <span class="feature-tag">Inspector Engine</span>
+            <h3 class="feature-title">Rich Virtualized Preview Pane</h3>
+            <p class="feature-body">
+              Rendered Markdown with tables and code blocks. Virtualized line-numbered text reader with jump-to-line highlighting and auto-encoding detection. Pan-and-zoom image inspector (5% to 1600%) with checkerboard transparency. NTFS capacity meters.
+            </p>
+            <div class="feature-chips">
+              <span class="chip">Markdown</span>
+              <span class="chip">5%–1600% Zoom</span>
+              <span class="chip">BOM Sniffing</span>
+              <span class="chip">50 MB Safety Cap</span>
+            </div>
+          </div>
+
+          <!-- Card 8: Windows Shell Integration -->
+          <div class="feature-card">
+            <span class="feature-tag">System Integration</span>
+            <h3 class="feature-title">Safe Shell Operations &amp; Terminal Launcher</h3>
+            <p class="feature-body">
+              Deletions default safely to Windows Recycle Bin via native Win32 <code>SHFileOperation</code> (<code>FOF_ALLOWUNDO</code>). Editable address bar expands environment variables (<code>%TEMP%</code>) and launches terminals (<code>wt</code>, <code>pwsh</code>, <code>code</code>) directly in the active folder.
+            </p>
+            <div class="feature-chips">
+              <span class="chip">SHFileOperation</span>
+              <span class="chip">wt / pwsh / cmd</span>
+              <span class="chip">ITaskbarList3</span>
+              <span class="chip">Env Autocomplete</span>
+            </div>
+          </div>
+
+          <!-- Card 9: Developer Ignore Rules -->
+          <div class="feature-card">
+            <span class="feature-tag">Smart Filtering</span>
+            <h3 class="feature-title">Automatic .gitignore &amp; Fast Toggles</h3>
+            <p class="feature-body">
+              Automatically respects <code>.gitignore</code>, <code>.ignore</code>, and <code>.rgignore</code> while filtering noisy build directories (<code>node_modules</code>, <code>bin</code>, <code>obj</code>, <code>.vs</code>). Press <code>Ctrl+I</code> to instantly bypass ignore rules or <code>Ctrl+H</code> to inspect hidden files.
+            </p>
+            <div class="feature-chips">
+              <span class="chip">.gitignore</span>
+              <span class="chip">Ctrl+I Bypass</span>
+              <span class="chip">Ctrl+H Hidden</span>
+              <span class="chip">Alt+P Filename Only</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ======================================================================
-         6. Linear-Style Privacy & Architecture Guarantee
+         7. Deep-Dive Workflows (Diff & Merge, Treemap, In-Place Archives)
          ====================================================================== -->
-    <section id="privacy" class="section">
+    <section class="deep-dive-section" id="workflows">
       <div class="container">
-        <div class="privacy-container" data-spotlight>
-          <div class="privacy-header">
-            <div class="privacy-pill">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-              </svg>
-              <span>100% Offline &amp; Private</span>
+        <div class="section-header" style="max-width: 720px;">
+          <span class="section-tag">Essential Developer Workflows</span>
+          <h2 class="section-title">Built-in tools that eliminate external utility switching.</h2>
+          <p class="section-lead">
+            Compare files, inspect archives, and diagnose drive bloat directly inside your file manager tab system.
+          </p>
+        </div>
+
+        <div class="deep-dive-grid">
+          <!-- Workflow 1: Diff & Merge -->
+          <div class="workflow-card">
+            <div class="workflow-card-header">
+              <div class="workflow-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"></path>
+                </svg>
+              </div>
+              <h3 class="workflow-card-title">Embedded Diff &amp; Merge</h3>
             </div>
-            <h2 class="section-title">Zero Telemetry. Zero Cloud. Zero Indexing Bloat.</h2>
-            <p class="section-desc">
-              Your filesystem and source code are strictly yours. Glob Explorer is built to operate without network permissions or background daemon drain.
+            <p class="workflow-card-body">
+              Compare any two files with Eugene Myers' $O(ND)$ diff engine. DirectComposition hardware clipping ensures side-by-side panes never bleed text during fast trackpad scrolling.
+            </p>
+            <div class="mini-diff-viz">
+              <div class="diff-viz-row">
+                <div class="diff-viz-pane diff-del">- const useDaemon = true;</div>
+                <div class="diff-viz-pane diff-add">+ const useDaemon = false;</div>
+              </div>
+              <div class="diff-viz-row">
+                <div class="diff-viz-pane">  return StreamResults();</div>
+                <div class="diff-viz-pane">  return StreamResults();</div>
+              </div>
+            </div>
+            <ul class="workflow-spec-list">
+              <li>Token-level sub-line change detection</li>
+              <li>Proportional minimap overview canvas</li>
+              <li>Atomic temp-file swap &amp; BOM preservation</li>
+            </ul>
+          </div>
+
+          <!-- Workflow 2: Storage Treemap -->
+          <div class="workflow-card">
+            <div class="workflow-card-header">
+              <div class="workflow-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="3" y1="9" x2="21" y2="9"></line>
+                  <line x1="9" y1="21" x2="9" y2="9"></line>
+                </svg>
+              </div>
+              <h3 class="workflow-card-title">Disk Space Treemap Analyzer</h3>
+            </div>
+            <p class="workflow-card-body">
+              Instant squarified treemap visualization (<code>Ctrl+Shift+4</code>) categorizes file allocations by type and reveals disk hogs in seconds.
+            </p>
+            <div class="mini-treemap-viz">
+              <div class="treemap-box box-code">
+                <span>Code (48%)</span>
+                <span>12.4 GB</span>
+              </div>
+              <div class="treemap-box box-video">
+                <span>Media (32%)</span>
+                <span>8.1 GB</span>
+              </div>
+              <div class="treemap-box box-images">
+                <span>Images (12%)</span>
+                <span>3.0 GB</span>
+              </div>
+              <div class="treemap-box box-archives">
+                <span>Archives (8%)</span>
+                <span>2.1 GB</span>
+              </div>
+            </div>
+            <ul class="workflow-spec-list">
+              <li>Squarified proportional allocation layout</li>
+              <li>Double-click drill down into child subdirectories</li>
+              <li>Synchronized with the rich preview pane</li>
+            </ul>
+          </div>
+
+          <!-- Workflow 3: In-Place Archives -->
+          <div class="workflow-card">
+            <div class="workflow-card-header">
+              <div class="workflow-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                  <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                </svg>
+              </div>
+              <h3 class="workflow-card-title">In-Place Archive Browsing</h3>
+            </div>
+            <p class="workflow-card-body">
+              Navigate compressed packages as if they were standard directories without unpacking to temp folders. Stream files on demand.
+            </p>
+            <ul class="workflow-spec-list" style="margin-top: 24px;">
+              <li>Zero-extraction nested folder navigation</li>
+              <li>Supports .zip, .tar, .tar.gz, .tgz, .7z, .rar</li>
+              <li>Powered by Windows-bundled <code>tar.exe</code> (libarchive)</li>
+              <li>Taskbar extraction progress via <code>ITaskbarList3</code></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         8. Keyboard Shortcuts Reference Table
+         ====================================================================== -->
+    <section class="shortcuts-section" id="shortcuts">
+      <div class="container">
+        <div class="shortcuts-grid">
+          <!-- Sticky Overview -->
+          <div class="shortcuts-sticky-info">
+            <span class="section-tag">Keyboard-First</span>
+            <h2 class="section-title">Designed for home row navigation.</h2>
+            <p class="section-lead">
+              Filter repositories, open tabs, toggle inspector panes, and launch terminals without taking your hands off the keyboard.
             </p>
           </div>
 
-          <div class="privacy-pillars-grid">
-            <div class="pillar-card">
-              <div class="pillar-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="2" x2="22" y1="2" y2="22"/>
-                  <path d="M8.5 16.5a5 5 0 0 1 7 0"/>
-                  <path d="M2 8.82a15 15 0 0 1 4.17-2.65"/>
-                  <path d="M10.66 5c4.01-.36 8.14.9 11.34 3.76"/>
-                  <path d="M16.85 11.25a10 10 0 0 1 2.22 1.68"/>
-                  <path d="M5 13a10 10 0 0 1 5.24-2.76"/>
-                  <line x1="12" x2="12.01" y1="20" y2="20"/>
-                </svg>
+          <!-- Shortcuts Card with Real-Time Filter -->
+          <div class="shortcuts-table-card">
+            <input
+              type="text"
+              id="shortcuts-search-input"
+              class="shortcuts-search-input"
+              placeholder="Filter shortcuts (e.g. search, tab, diff, terminal)…"
+              spellcheck="false"
+              aria-label="Filter keyboard shortcuts"
+            />
+
+            <div class="shortcuts-list" id="shortcuts-list">
+              <div class="shortcut-row">
+                <span class="shortcut-label">Focus search box &amp; start typing</span>
+                <span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>K</kbd><span class="kbd-separator">or</span><kbd>Ctrl</kbd>+<kbd>L</kbd></span>
               </div>
-              <h3 class="pillar-title">No Network Permission</h3>
-              <p class="pillar-desc">
-                Glob Explorer does not even declare the <code class="code-chip">internetClient</code> capability in its Windows AppX manifest. It is physically impossible for data to leak off your computer.
-              </p>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Switch to File Search / Content Search (#)</span>
+                <span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>1</kbd><span class="kbd-separator">/</span><kbd>Ctrl</kbd>+<kbd>2</kbd></span>
+              </div>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Command Mode (&gt;) / Recent Files (@)</span>
+                <span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>3</kbd><span class="kbd-separator">/</span><kbd>Ctrl</kbd>+<kbd>4</kbd></span>
+              </div>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Toggle Storage Analyzer Treemap view</span>
+                <span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>4</kbd></span>
+              </div>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Open selected file / Navigate into folder</span>
+                <span class="shortcut-keys"><kbd>Enter</kbd></span>
+              </div>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Reveal in Windows Explorer with file pre-selected</span>
+                <span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>Enter</kbd></span>
+              </div>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Open file in configured editor at matching line</span>
+                <span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>E</kbd></span>
+              </div>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Open terminal (wt, pwsh, cmd) at directory</span>
+                <span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>T</kbd></span>
+              </div>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Copy absolute file path</span>
+                <span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd></span>
+              </div>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Copy relative path (forward-slash normalized)</span>
+                <span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd></span>
+              </div>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Toggle Preview pane</span>
+                <span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>P</kbd></span>
+              </div>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Toggle .gitignore and developer ignore rules</span>
+                <span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>I</kbd></span>
+              </div>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Toggle hidden and system files</span>
+                <span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>H</kbd></span>
+              </div>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Toggle filename-only matching (vs. full path)</span>
+                <span class="shortcut-keys"><kbd>Alt</kbd>+<kbd>P</kbd></span>
+              </div>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Open drive and recent scopes dropdown</span>
+                <span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>D</kbd></span>
+              </div>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Navigate to parent folder</span>
+                <span class="shortcut-keys"><kbd>Alt</kbd>+<kbd>Up</kbd><span class="kbd-separator">or</span><kbd>Ctrl</kbd>+<kbd>Up</kbd></span>
+              </div>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Create new folder (interactive dialog)</span>
+                <span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd></span>
+              </div>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Rename selected item</span>
+                <span class="shortcut-keys"><kbd>F2</kbd></span>
+              </div>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Delete to Recycle Bin / Permanent delete</span>
+                <span class="shortcut-keys"><kbd>Del</kbd><span class="kbd-separator">/</span><kbd>Shift</kbd>+<kbd>Del</kbd></span>
+              </div>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Refresh directory / Invalidate search cache</span>
+                <span class="shortcut-keys"><kbd>F5</kbd></span>
+              </div>
+              <div class="shortcut-row">
+                <span class="shortcut-label">Open Settings</span>
+                <span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>,</kbd></span>
+              </div>
             </div>
 
-            <div class="pillar-card">
-              <div class="pillar-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect width="16" height="16" x="4" y="4" rx="2"/>
-                  <rect width="6" height="6" x="9" y="9" rx="1"/>
-                  <path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/>
-                  <path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/>
-                </svg>
-              </div>
-              <h3 class="pillar-title">Zero Background Service</h3>
-              <p class="pillar-desc">
-                Consumes 0% CPU and 0 MB RAM when closed. Never runs a background indexing daemon that thrashes SSD read cycles or burns laptop battery.
-              </p>
-            </div>
-
-            <div class="pillar-card">
-              <div class="pillar-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                  <polyline points="14 2 14 8 20 8"/>
-                  <line x1="16" x2="8" y1="13" y2="13"/>
-                  <line x1="16" x2="8" y1="17" y2="17"/>
-                </svg>
-              </div>
-              <h3 class="pillar-title">Local JSON Storage</h3>
-              <p class="pillar-desc">
-                Preferences (<code class="code-chip">settings.json</code>), pinned tabs (<code class="code-chip">pinned.json</code>), and rotating local diagnostics live strictly in your <code class="code-chip">%LOCALAPPDATA%</code> directory.
-              </p>
+            <div class="no-shortcuts-found" id="no-shortcuts-found" style="display: none;">
+              No keyboard shortcuts match your search term.
             </div>
           </div>
         </div>
@@ -718,99 +678,138 @@
     </section>
 
     <!-- ======================================================================
-         7. Linear-Style Monumental Pre-Footer CTA Banner
+         9. Privacy, Security & Resource Footprint
          ====================================================================== -->
-    <section class="prefooter-cta-section">
-      <div class="cta-spotlight-beam" aria-hidden="true"></div>
+    <section class="privacy-section" id="privacy">
       <div class="container">
-        <div class="cta-inner">
-          <span class="cta-eyebrow">Experience Filesystem Velocity</span>
-          <h2 class="cta-title">Upgrade your Windows file workflow today.</h2>
-          <p class="cta-subtitle">
-            Version 1.0.0 · Available for Windows 10 &amp; 11 (x64 &amp; ARM64) · Published by Bee Base
+        <div class="section-header" style="max-width: 720px;">
+          <span class="section-tag">100% Offline &amp; Private</span>
+          <h2 class="section-title">Zero telemetry. Zero cloud. Zero indexing bloat.</h2>
+          <p class="section-lead">
+            Your filesystem and source code are strictly yours. Glob Explorer operates completely offline without network capabilities or persistent daemons.
           </p>
+        </div>
 
-          <div class="cta-buttons-wrapper">
+        <div class="privacy-grid">
+          <div class="privacy-col">
+            <h3 class="privacy-title">No network permission</h3>
+            <p class="privacy-desc">
+              The Windows AppX package manifest does not declare the <code>internetClient</code> capability. It is cryptographically prohibited by the OS from making inbound or outbound network calls.
+            </p>
+          </div>
+
+          <div class="privacy-col">
+            <h3 class="privacy-title">No background service</h3>
+            <p class="privacy-desc">
+              0% CPU and 0 MB RAM when closed. No persistent indexing services running 24/7, chewing battery or degrading SSD endurance. Search runs strictly on demand.
+            </p>
+          </div>
+
+          <div class="privacy-col">
+            <h3 class="privacy-title">Clean local JSON storage</h3>
+            <p class="privacy-desc">
+              Settings, pinned tabs, and window positions are saved exclusively as human-readable JSON files in <code>%LOCALAPPDATA%</code>. Zero clutter or keys added to the Windows Registry.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         10. Technical Specifications
+         ====================================================================== -->
+    <section class="specs-section" id="specs">
+      <div class="container">
+        <div class="specs-card">
+          <div class="spec-item">
+            <span class="spec-label">Product Name</span>
+            <span class="spec-value">Glob Explorer</span>
+            <span class="spec-sub">Codebase: Glob · v1.0.8</span>
+          </div>
+
+          <div class="spec-item">
+            <span class="spec-label">Publisher</span>
+            <span class="spec-value">Bee Base</span>
+            <span class="spec-sub">Independent Developer Tools</span>
+          </div>
+
+          <div class="spec-item">
+            <span class="spec-label">Platform</span>
+            <span class="spec-value">Windows 10 &amp; 11</span>
+            <span class="spec-sub">Build 19041+ (20H1 or newer)</span>
+          </div>
+
+          <div class="spec-item">
+            <span class="spec-label">Architectures</span>
+            <span class="spec-value">x64 &amp; ARM64</span>
+            <span class="spec-sub">Native builds for Intel/AMD &amp; Snapdragon</span>
+          </div>
+
+          <div class="spec-item">
+            <span class="spec-label">Runtime &amp; UI</span>
+            <span class="spec-value">.NET 10 LTS + WinUI 3</span>
+            <span class="spec-sub">Windows App SDK 1.8 · Mica Backdrop</span>
+          </div>
+
+          <div class="spec-item">
+            <span class="spec-label">Search Engines</span>
+            <span class="spec-value">rg.exe + C# fzf v2</span>
+            <span class="spec-sub">Bundled ripgrep + fuzzy scoring</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         11. Final Call-to-Action Banner
+         ====================================================================== -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-banner">
+          <h2 class="cta-title">Upgrade your Windows file workflow today.</h2>
+
+          <div class="cta-actions">
             <a
               href="https://apps.microsoft.com/detail/9NH3SKHSVBK1?hl=en-us&gl=US&ocid=pdpshare"
               target="_blank"
               rel="noopener noreferrer"
-              class="btn-linear-primary btn-large"
+              class="btn-primary"
             >
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="win-icon">
-                <path d="M0 0h7.5v7.5H0V0zm8.5 0H16v7.5H8.5V0zM0 8.5h7.5V16H0V8.5zm8.5 0H16V16H8.5V8.5z"/>
-              </svg>
-              <span>Get it from Microsoft Store</span>
-              <span class="btn-arrow" aria-hidden="true">→</span>
+              <span>Get it from Microsoft Store →</span>
             </a>
 
             <a
               href="ms-windows-store://pdp/?productid=9NH3SKHSVBK1"
-              class="btn-linear-secondary btn-large"
+              class="btn-secondary"
             >
-              <span>Open in Windows Store app</span>
-              <span class="btn-external-icon" aria-hidden="true">↗</span>
+              <span>Open Store app ↗</span>
             </a>
           </div>
+
+          <span class="cta-meta">
+            Glob Explorer v1.0.8 · Self-contained MSIX · Windows 10 &amp; 11 (x64 &amp; ARM64) · Published by Bee Base
+          </span>
         </div>
       </div>
     </section>
   </main>
 
   <!-- ========================================================================
-       8. Linear-Style Minimal Footer
+       12. Footer
        ======================================================================== -->
-  <footer class="footer" role="contentinfo">
+  <footer class="site-footer">
     <div class="container footer-inner">
-      <div class="footer-left">
-        <a href="#" class="footer-brand" aria-label="Glob Explorer">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="22" height="22" role="img" aria-label="Glob Explorer icon">
-            <rect width="512" height="512" rx="114" fill="url(#glob-nav-bg)"/>
-            <g stroke="#FFFFFF" stroke-width="46" stroke-linecap="round">
-              <path d="M256 136 L256 376"/>
-              <path d="M152 196 L360 316"/>
-              <path d="M152 316 L360 196"/>
-            </g>
-          </svg>
-          <span class="footer-brand-title">Glob Explorer</span>
-        </a>
-        <span class="footer-copy">© 2026 Bee Base. All rights reserved.</span>
-        <div class="footer-status">
-          <span class="status-pulse-dot"></span>
-          <span>Windows 10 &amp; 11 Native · 100% Offline</span>
-        </div>
-      </div>
-
-      <div class="footer-right">
-        <a
-          href="https://apps.microsoft.com/detail/9NH3SKHSVBK1?hl=en-us&gl=US&ocid=pdpshare"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Microsoft Store
-        </a>
-        <a href="ms-windows-store://pdp/?productid=9NH3SKHSVBK1">
-          Store App (Direct)
-        </a>
-        <a href="#privacy">
-          Privacy Policy
-        </a>
-        <span class="footer-tech-note">
-          ripgrep (MIT/Unlicense) · WinUI 3
-        </span>
+      <span>© 2026 Bee Base. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="https://apps.microsoft.com/detail/9NH3SKHSVBK1?hl=en-us&gl=US&ocid=pdpshare" target="_blank" rel="noopener noreferrer">Microsoft Store</a>
+        <a href="#search">Search</a>
+        <a href="#features">Features</a>
+        <a href="#shortcuts">Shortcuts</a>
+        <a href="#privacy">Privacy</a>
+        <span>ripgrep (MIT/Unlicense) · WinUI 3</span>
       </div>
     </div>
   </footer>
-
-  <!-- Fullscreen Screenshot Lightbox Modal -->
-  <div id="screenshot-lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Screenshot Fullscreen Preview">
-    <div class="lightbox-content">
-      <button type="button" id="lightbox-close" class="lightbox-close" aria-label="Close preview">
-        ESC · Close
-      </button>
-      <img id="lightbox-image" src="assets/search.png" alt="Glob Explorer Fullscreen Preview" />
-    </div>
-  </div>
 
   <script src="script.js"></script>
 </body>
