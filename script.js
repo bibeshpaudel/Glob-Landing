@@ -525,4 +525,22 @@
     });
   }
 
+  /* ==========================================================================
+     6. Smooth Scroll to Top for Brand Link
+     ========================================================================== */
+  const brandLinks = document.querySelectorAll('a[href="#top"], .brand-link');
+  brandLinks.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+      if (window.history && window.history.pushState) {
+        window.history.pushState(null, '', window.location.pathname + window.location.search);
+      }
+    });
+  });
+
 })();
